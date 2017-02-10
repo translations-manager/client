@@ -1,0 +1,50 @@
+.projectPresentation {
+  position: relative;
+  .projectPresentation-project {
+    width: 100%;
+    height: 100%;
+    margin: 5px;
+    background: #ccc;
+    box-shadow: 2px 2px 2px #888888;
+    text-transform: uppercase;
+    display: block;
+    color: black;
+    &:hover {
+      cursor: pointer;
+      background: #ddd;
+      text-decoration: none;
+    }
+  }
+  .projectPresentation-edit {
+    background: #777;
+    color: white;
+    font-size: 15px;
+    line-height: 30px;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    right: 35px;
+    top: -15px;
+    border-radius: 5px;
+    &:hover {
+      background: #888;
+    }
+  }
+  .projectPresentation-remove {
+    background: #d9534f;
+    color: white;
+    font-size: 15px;
+    line-height: 30px;
+    text-align: center;
+    height: 30px;
+    width: 30px;
+    position: absolute;
+    right: 0;
+    top: -15px;
+    border-radius: 5px;
+    &:hover {
+      background: #c9302c;
+    }
+  }
+}

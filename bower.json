@@ -1,0 +1,28 @@
+{
+  "name": "translations-manager-client",
+  "description": "This is the client side of the Translations Manager application. Manage all your translations here",
+  "main": "src/main.js",
+  "authors": [
+    "Pierre Rolland <roll.pierre@gmail.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "translations",
+    "manager",
+    "translate",
+    "localization",
+    "l10n"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

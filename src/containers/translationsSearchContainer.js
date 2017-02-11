@@ -38,7 +38,7 @@ export default React.createClass({
     },
     handleTranslationUpdate(translation) {
         $.ajax({
-            url: `${this.props.api}/translations`,
+            url: translation.id ? `${this.props.api}/translations/${translation.id}` : `${this.props.api}/translations`,
             data: translation,
             method: translation.id ? 'PUT' : 'POST'
         }).done(() => {

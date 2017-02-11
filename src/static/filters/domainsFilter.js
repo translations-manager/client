@@ -11,7 +11,7 @@ export default React.createClass({
         let domain = this.props.project.domains.find((domainItem) => {
             return val === domainItem.id;
         });
-        let checkedDomains = this.state.checkedDomains;
+        let checkedDomains = this.state.checkedDomains.slice(0);
         let idx = checkedDomains.indexOf(domain);
 
         if (idx !== -1) {

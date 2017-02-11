@@ -10,6 +10,7 @@ export default React.createClass({
     getInitialState() {
         return {
             displayedLocales: [],
+            domains: [],
             translations: []
         }
     },
@@ -17,9 +18,15 @@ export default React.createClass({
         this.query();
     },
     componentDidUpdate(prevProps, prevState) {
-        if (JSON.stringify(prevState.displayedLocales) !== JSON.stringify(this.state.displayedLocales)) {
+        if (
+            JSON.stringify(prevState.displayedLocales) !== JSON.stringify(this.state.displayedLocales) ||
+            JSON.stringify(prevState.domains) !== JSON.stringify(this.state.domains)
+        ) {
             this.query();
         }
+    },
+    updateDomains(domains) {
+        this.setState({domains});
     },
     updateDisplayedLocales(displayedLocales) {
         this.setState({displayedLocales});
@@ -37,7 +44,10 @@ export default React.createClass({
         let localeIdsQuery = this.state.displayedLocales.map((locale) => {
             return `locale_ids[]=${locale.id}`;
         }).join('&');
-        $.get(`${this.props.api}/phrases?${localeIdsQuery}`, (data) => {
+        let domainIdsQuery = this.state.domains.map((domain) => {
+            return `domain_ids[]=${domain.id}`;
+        }).join('&');
+        $.get(`${this.props.api}/phrases?project=${this.props.project.id}&${localeIdsQuery}&${domainIdsQuery}`, (data) => {
             this.setState({translations: data});
         });
     },
@@ -47,6 +57,7 @@ export default React.createClass({
                 <TranslationSearchFilters
                     project={this.props.project}
                     onDisplayedLocalesChange={this.updateDisplayedLocales}
+                    onDomainsChange={this.updateDomains}
                 />
                 <PhraseNewContainer project={this.props.project} api={this.props.api} />
                 <TranslationsTable

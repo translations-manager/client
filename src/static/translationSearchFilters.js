@@ -9,7 +9,7 @@ export default React.createClass({
         // fire event
     },
     updateDomainsFilter(domains) {
-        // fire event
+        this.props.onDomainsChange(domains);
     },
     updateLocalesFilter(locales) {
         this.props.onDisplayedLocalesChange(locales);

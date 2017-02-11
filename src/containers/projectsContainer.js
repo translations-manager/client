@@ -16,9 +16,6 @@ export default React.createClass({
             this.setState({projects: data});
         });
     },
-    projectSelected(project) {
-        // goto project
-    },
     askForRemoval(project) {
         this.setState({toRemove: project});
     },
@@ -50,7 +47,6 @@ export default React.createClass({
                     this.state.projects.map((project, id) => {
                         return (
                             <ProjectPresentation
-                                onProjectSelect={this.projectSelected}
                                 onProjectRemove={this.askForRemoval}
                                 key={id}
                                 project={project}

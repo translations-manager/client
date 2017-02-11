@@ -5,8 +5,8 @@ import LocalesFilter from '../static/filters/localesFilter';
 import SearchFilter from '../static/filters/searchFilter';
 
 export default React.createClass({
-    updateSearch(search) {
-        // fire event
+    updateSearch(query) {
+        this.props.onQueryChange(query);
     },
     updateDomainsFilter(domains) {
         this.props.onDomainsChange(domains);

@@ -11,6 +11,7 @@ export default React.createClass({
         return {
             displayedLocales: [],
             domains: [],
+            query: '',
             translations: []
         }
     },
@@ -20,7 +21,8 @@ export default React.createClass({
     componentDidUpdate(prevProps, prevState) {
         if (
             JSON.stringify(prevState.displayedLocales) !== JSON.stringify(this.state.displayedLocales) ||
-            JSON.stringify(prevState.domains) !== JSON.stringify(this.state.domains)
+            JSON.stringify(prevState.domains) !== JSON.stringify(this.state.domains) ||
+            prevState.query !== this.state.query
         ) {
             this.query();
         }
@@ -30,6 +32,9 @@ export default React.createClass({
     },
     updateDisplayedLocales(displayedLocales) {
         this.setState({displayedLocales});
+    },
+    updateQuery(query) {
+        this.setState({query});
     },
     handleTranslationUpdate(translation) {
         $.ajax({
@@ -47,7 +52,7 @@ export default React.createClass({
         let domainIdsQuery = this.state.domains.map((domain) => {
             return `domain_ids[]=${domain.id}`;
         }).join('&');
-        $.get(`${this.props.api}/phrases?project=${this.props.project.id}&${localeIdsQuery}&${domainIdsQuery}`, (data) => {
+        $.get(`${this.props.api}/phrases?project=${this.props.project.id}&${localeIdsQuery}&${domainIdsQuery}&q=${this.state.query}`, (data) => {
             this.setState({translations: data});
         });
     },
@@ -58,6 +63,7 @@ export default React.createClass({
                     project={this.props.project}
                     onDisplayedLocalesChange={this.updateDisplayedLocales}
                     onDomainsChange={this.updateDomains}
+                    onQueryChange={this.updateQuery}
                 />
                 <PhraseNewContainer project={this.props.project} api={this.props.api} />
                 <TranslationsTable

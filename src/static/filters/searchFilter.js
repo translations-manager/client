@@ -7,7 +7,9 @@ export default React.createClass({
         }
     },
     handleChange(e) {
+        e.preventDefault();
         this.setState({query: e.target.value});
+        this.props.onChange(e.target.value);
     },
     render() {
         return (
@@ -21,6 +23,7 @@ export default React.createClass({
                         type="text"
                         placeholder="Search by key, translation, ..."
                         onChange={this.handleChange}
+                        value={this.state.query}
                     />
                 </div>
             </div>

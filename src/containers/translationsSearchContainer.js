@@ -3,6 +3,7 @@ import $ from 'jquery';
 
 import PhraseNewContainer from '../containers/phraseNewContainer';
 
+import ConfirmPopin from '../static/confirmPopin';
 import TranslationSearchFilters from '../static/translationSearchFilters';
 import TranslationsTable from '../static/translationsTable';
 
@@ -12,7 +13,8 @@ export default React.createClass({
             displayedLocales: [],
             domains: [],
             query: '',
-            translations: []
+            translations: [],
+            phraseToDelete: null
         }
     },
     componentDidMount() {
@@ -45,6 +47,21 @@ export default React.createClass({
             this.query();
         });
     },
+    handleAskForDelete(phrase) {
+        this.setState({phraseToDelete: phrase});
+    },
+    okForDelete() {
+        $.ajax({
+            url: `${this.props.api}/phrases/${this.state.phraseToDelete.id}`,
+            method: 'DELETE'
+        }).done(() => {
+            this.query();
+            this.setState({phraseToDelete: null});
+        });
+    },
+    clearPhraseToDelete() {
+        this.setState({phraseToDelete: null});
+    },
     query() {
         let localeIdsQuery = this.state.displayedLocales.map((locale) => {
             return `locale_ids[]=${locale.id}`;
@@ -59,6 +76,7 @@ export default React.createClass({
     render() {
         return (
             <div className="translationsSearch">
+                {this.state.phraseToDelete ? <ConfirmPopin message="Are you sure you want to delete this phrase ?" onOk={this.okForDelete} onCancel={this.clearPhraseToDelete} /> : null}
                 <TranslationSearchFilters
                     project={this.props.project}
                     onDisplayedLocalesChange={this.updateDisplayedLocales}
@@ -70,6 +88,7 @@ export default React.createClass({
                     displayedLocales={this.state.displayedLocales}
                     translations={this.state.translations}
                     onTranslationUpdate={this.handleTranslationUpdate}
+                    onAskForDelete={this.handleAskForDelete}
                 />
             </div>
         );

@@ -7,14 +7,20 @@ export default React.createClass({
         translation.phrase = this.props.phrase.id;
         this.props.onTranslationUpdate(translation);
     },
+    handleDeleteClick() {
+        this.props.onAskForDelete(this.props.phrase);
+    },
     render() {
         return (
-            <tr>
+            <tr className="translationsRow">
                 <td>{this.props.phrase.domain}</td>
                 <td>{this.props.phrase.key}</td>
                 {this.props.phrase.translations.map((translation, i) => {
                     return <TranslationCell key={i} translation={translation} onUpdate={this.handleTranslationUpdate} />
                 })}
+                <td className="translationsRow-delete">
+                    <span className="glyphicon glyphicon-trash" onClick={this.handleDeleteClick}> </span>
+                </td>
             </tr>
         );
     }

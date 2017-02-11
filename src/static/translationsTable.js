@@ -6,6 +6,9 @@ export default React.createClass({
     handleTranslationUpdate(translation) {
         this.props.onTranslationUpdate(translation);
     },
+    handleAskForDelete(phrase) {
+        this.props.onAskForDelete(phrase);
+    },
     render() {
         return (
             <table className="translationsTable table table-striped">
@@ -20,7 +23,12 @@ export default React.createClass({
                 </thead>
                 <tbody>
                     {this.props.translations.map((phrase, i) => {
-                        return <TranslationsRow key={i} phrase={phrase} onTranslationUpdate={this.handleTranslationUpdate} />;
+                        return <TranslationsRow
+                            key={i}
+                            phrase={phrase}
+                            onTranslationUpdate={this.handleTranslationUpdate}
+                            onAskForDelete={this.handleAskForDelete}
+                        />;
                     })}
                 </tbody>
             </table>

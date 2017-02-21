@@ -21,6 +21,11 @@ export default React.createClass({
         this.props.onUpdate(translation);
         this.setState({translation, mode: 'display'});
     },
+    componentDidUpdate(prevProps) {
+        if (JSON.stringify(prevProps.translation) !== JSON.stringify(this.props.translation)) {
+            this.setState({translation: this.props.translation, content: this.props.translation.content});
+        }
+    },
     render() {
         if (this.state.mode === 'edit') {
             return (

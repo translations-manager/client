@@ -11,9 +11,6 @@ export default React.createClass({
     switchToEditMode() {
         this.setState({mode: 'edit'});
     },
-    switchToDisplayMode() {
-        this.setState({mode: 'display'});
-    },
     handleChange(e) {
         e.preventDefault();
         this.setState({content: e.target.value});
@@ -33,19 +30,13 @@ export default React.createClass({
         if (this.state.mode === 'edit') {
             return (
                 <td className="translationCell">
-                    <input type="text" value={this.state.content} onChange={this.handleChange} onBlur={this.switchToDisplayMode} />
-                    <button className="btn btn-xs" onClick={this.handleSubmit}>
-                        <span className="glyphicon glyphicon-ok"> </span>
-                    </button>
+                    <input type="text" value={this.state.content} onChange={this.handleChange} onBlur={this.handleSubmit} />
                 </td>
             );
         }
         return (
-            <td className="translationCell">
+            <td className="translationCell" onClick={this.switchToEditMode}>
                 {this.state.translation.content}
-                <button className="btn btn-xs translationCell-edit" onClick={this.switchToEditMode}>
-                    <span className="glyphicon glyphicon-pencil"> </span>
-                </button>
             </td>
         );
     }

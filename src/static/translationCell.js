@@ -32,7 +32,7 @@ export default React.createClass({
     render() {
         if (this.state.mode === 'edit') {
             return (
-                <td>
+                <td className="translationCell">
                     <input type="text" value={this.state.content} onChange={this.handleChange} onBlur={this.switchToDisplayMode} />
                     <button className="btn btn-xs" onClick={this.handleSubmit}>
                         <span className="glyphicon glyphicon-ok"> </span>
@@ -41,9 +41,9 @@ export default React.createClass({
             );
         }
         return (
-            <td>
+            <td className="translationCell">
                 {this.state.translation.content}
-                <button className="btn btn-xs" onClick={this.switchToEditMode}>
+                <button className="btn btn-xs translationCell-edit" onClick={this.switchToEditMode}>
                     <span className="glyphicon glyphicon-pencil"> </span>
                 </button>
             </td>

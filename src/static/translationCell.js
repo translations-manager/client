@@ -11,6 +11,9 @@ export default React.createClass({
     switchToEditMode() {
         this.setState({mode: 'edit'});
     },
+    switchToDisplayMode() {
+        this.setState({mode: 'display'});
+    },
     handleChange(e) {
         e.preventDefault();
         this.setState({content: e.target.value});
@@ -30,7 +33,7 @@ export default React.createClass({
         if (this.state.mode === 'edit') {
             return (
                 <td>
-                    <input type="text" value={this.state.content} onChange={this.handleChange} />
+                    <input type="text" value={this.state.content} onChange={this.handleChange} onBlur={this.switchToDisplayMode} />
                     <button className="btn btn-xs" onClick={this.handleSubmit}>
                         <span className="glyphicon glyphicon-ok"> </span>
                     </button>

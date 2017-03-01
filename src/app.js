@@ -1,7 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router';
 
+import LoginContainer from './containers/loginContainer';
+
 export default React.createClass({
+    getInitialState() {
+        return {
+            loggedIn: false
+        };
+    },
+    handleLoggedIn() {
+        this.setState({loggedIn: true});
+    },
+    logOut(e) {
+        e.preventDefault();
+        localStorage.removeItem('authToken');
+        this.setState({loggedIn: false});
+    },
     render() {
         return (
             <div className="container">
@@ -12,9 +27,16 @@ export default React.createClass({
                                 Translations Manager
                             </Link>
                         </div>
+                        {this.state.loggedIn ? (
+                            <ul className="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="#" onClick={this.logOut}>Log out</a>
+                                </li>
+                            </ul>
+                        ) : null}
                     </div>
                 </nav>
-                {this.props.children}
+                {this.state.loggedIn ? this.props.children : <LoginContainer onLoggedIn={this.handleLoggedIn} />}
             </div>
         )
     }

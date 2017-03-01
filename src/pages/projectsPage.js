@@ -15,7 +15,7 @@ export default React.createClass({
                     }
                 ]} />
                 <h1>List of projects</h1>
-                <ProjectsContainer api={this.props.route.config.api} />
+                <ProjectsContainer />
             </div>
         );
     }

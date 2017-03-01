@@ -3,6 +3,8 @@ import React from 'react';
 import PhraseNewForm from '../static/phraseNewForm';
 import AlertPopin from '../static/alertPopin';
 
+import Client from '../client';
+
 export default React.createClass({
     getInitialState() {
         return {
@@ -14,7 +16,11 @@ export default React.createClass({
         this.setState({displayForm: true});
     },
     addPhrase(phrase) {
-        $.post(`${this.props.api}/phrases`, phrase, (data) => {
+        Client.ajax({
+            type: 'POST',
+            url: `phrases`,
+            data: phrase
+        }).done(() => {
             this.setState({displayForm: false, message: 'Phrase added'});
         });
     },

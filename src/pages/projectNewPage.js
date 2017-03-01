@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
-import $ from 'jquery';
 
 import AlertPopin from '../static/alertPopin';
 import Breadcrumb from '../static/breadcrumb';
 import ProjectEditForm from '../static/projectEditForm';
+
+import Client from '../client';
 
 export default React.createClass({
     getInitialState() {
@@ -24,8 +25,8 @@ export default React.createClass({
         this.setState({message: null});
     },
     handleSubmit(project) {
-        $.ajax({
-            url: `${this.props.route.config.api}/projects`,
+        Client.ajax({
+            url: `projects`,
             type: 'POST',
             data: project
         }).done((data) => {

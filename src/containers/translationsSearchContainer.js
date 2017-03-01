@@ -1,11 +1,12 @@
 import React from 'react';
-import $ from 'jquery';
 
 import PhraseNewContainer from '../containers/phraseNewContainer';
 
 import ConfirmPopin from '../static/confirmPopin';
 import TranslationSearchFilters from '../static/translationSearchFilters';
 import TranslationsTable from '../static/translationsTable';
+
+import Client from '../client';
 
 export default React.createClass({
     getInitialState() {
@@ -39,8 +40,8 @@ export default React.createClass({
         this.setState({query});
     },
     handleTranslationUpdate(translation) {
-        $.ajax({
-            url: translation.id ? `${this.props.api}/translations/${translation.id}` : `${this.props.api}/translations`,
+        Client.ajax({
+            url: translation.id ? `translations/${translation.id}` : `translations`,
             data: translation,
             method: translation.id ? 'PUT' : 'POST'
         }).done(() => {
@@ -51,8 +52,8 @@ export default React.createClass({
         this.setState({phraseToDelete: phrase});
     },
     okForDelete() {
-        $.ajax({
-            url: `${this.props.api}/phrases/${this.state.phraseToDelete.id}`,
+        Client.ajax({
+            url: `phrases/${this.state.phraseToDelete.id}`,
             method: 'DELETE'
         }).done(() => {
             this.query();
@@ -69,7 +70,10 @@ export default React.createClass({
         let domainIdsQuery = this.state.domains.map((domain) => {
             return `domain_ids[]=${domain.id}`;
         }).join('&');
-        $.get(`${this.props.api}/phrases?project=${this.props.project.id}&${localeIdsQuery}&${domainIdsQuery}&q=${this.state.query}`, (data) => {
+        Client.ajax({
+            url: `phrases?project=${this.props.project.id}&${localeIdsQuery}&${domainIdsQuery}&q=${this.state.query}`,
+            type: 'GET'
+        }).done((data) => {
             this.setState({translations: data});
         });
     },
@@ -83,7 +87,7 @@ export default React.createClass({
                     onDomainsChange={this.updateDomains}
                     onQueryChange={this.updateQuery}
                 />
-                <PhraseNewContainer project={this.props.project} api={this.props.api} />
+                <PhraseNewContainer project={this.props.project} />
                 <TranslationsTable
                     displayedLocales={this.state.displayedLocales}
                     translations={this.state.translations}

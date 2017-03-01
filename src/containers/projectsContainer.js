@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
-import $ from 'jquery';
+
+import Client from '../client';
+
 import ConfirmPopin from '../static/confirmPopin';
 import ProjectPresentation from '../static/projectPresentation';
 
@@ -12,7 +14,10 @@ export default React.createClass({
         };
     },
     componentWillMount() {
-        $.get(`${this.props.api}/projects`, (data) => {
+        Client.ajax({
+            type: 'GET',
+            url: 'projects'
+        }).done((data) => {
             this.setState({projects: data});
         });
     },
@@ -20,11 +25,14 @@ export default React.createClass({
         this.setState({toRemove: project});
     },
     okForRemoval() {
-        $.ajax({
-            url: `${this.props.api}/projects/${this.state.toRemove.id}`,
+        Client.ajax({
+            url: `projects/${this.state.toRemove.id}`,
             type: 'DELETE'
         }).done(() => {
-            $.get(`${this.props.api}/projects`, (data) => {
+            Client.ajax({
+                type: 'GET',
+                url: 'projects'
+            }).done((data) => {
                 this.setState({projects: data, toRemove: null});
             });
         });

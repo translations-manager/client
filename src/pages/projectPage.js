@@ -4,6 +4,8 @@ import TranslationsSearchContainer from '../containers/translationsSearchContain
 
 import Breadcrumb from '../static/breadcrumb';
 
+import Client from '../client';
+
 export default React.createClass({
     getInitialState() {
         return {
@@ -11,7 +13,10 @@ export default React.createClass({
         }
     },
     componentWillMount() {
-        $.get(`${this.props.route.config.api}/projects/${this.props.params.id}`, (data) => {
+        Client.ajax({
+            type: 'GET',
+            url: `projects/${this.props.params.id}`
+        }).done((data) => {
             this.setState({project: data});
         });
     },
@@ -30,7 +35,7 @@ export default React.createClass({
                         }
                     ]} />
                     <h1>{this.state.project.name}</h1>
-                    <TranslationsSearchContainer project={this.state.project} api={this.props.route.config.api} />
+                    <TranslationsSearchContainer project={this.state.project} />
                 </div>
             ) : null
         );

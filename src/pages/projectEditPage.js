@@ -2,6 +2,7 @@ import React from 'react';
 
 import AlertPopin from '../static/alertPopin';
 import Breadcrumb from '../static/breadcrumb';
+import Loader from '../static/loader';
 import ProjectEditForm from '../static/projectEditForm';
 
 import Client from '../client';
@@ -32,7 +33,7 @@ export default React.createClass({
     },
     render() {
         if (!this.state.project && !this.state.message) {
-            return null;
+            return <Loader />;
         }
         return (
             <div className="editProjectPage">

@@ -4,13 +4,15 @@ import { Link } from 'react-router';
 import Client from '../client';
 
 import ConfirmPopin from '../static/confirmPopin';
+import Loader from '../static/loader';
 import ProjectPresentation from '../static/projectPresentation';
 
 export default React.createClass({
     getInitialState() {
         return {
             projects: [],
-            toRemove: null
+            toRemove: null,
+            loaded: false
         };
     },
     componentWillMount() {
@@ -18,7 +20,7 @@ export default React.createClass({
             type: 'GET',
             url: 'projects'
         }).done((data) => {
-            this.setState({projects: data});
+            this.setState({projects: data, loaded: true});
         });
     },
     askForRemoval(project) {
@@ -41,7 +43,7 @@ export default React.createClass({
         this.setState({toRemove: null});
     },
     render() {
-        return (
+        return this.state.loaded ? (
             <div className="projectsContainer">
                 {this.state.toRemove ? (
                     <ConfirmPopin
@@ -68,6 +70,6 @@ export default React.createClass({
                     <Link className="btn btn-primary" to="new-project">New project</Link>
                 </div>
             </div>
-        );
+        ) : (<Loader />);
     }
 });

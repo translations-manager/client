@@ -3,6 +3,7 @@ import React from 'react';
 import TranslationsSearchContainer from '../containers/translationsSearchContainer';
 
 import Breadcrumb from '../static/breadcrumb';
+import Loader from '../static/loader';
 
 import Client from '../client';
 
@@ -37,7 +38,7 @@ export default React.createClass({
                     <h1>{this.state.project.name}</h1>
                     <TranslationsSearchContainer project={this.state.project} />
                 </div>
-            ) : null
+            ) : <Loader />
         );
     }
 });

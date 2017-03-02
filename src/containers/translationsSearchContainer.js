@@ -43,7 +43,7 @@ export default React.createClass({
         Client.ajax({
             url: translation.id ? `translations/${translation.id}` : `translations`,
             data: translation,
-            method: translation.id ? 'PUT' : 'POST'
+            type: translation.id ? 'PUT' : 'POST'
         }).done(() => {
             this.query();
         });
@@ -54,7 +54,7 @@ export default React.createClass({
     okForDelete() {
         Client.ajax({
             url: `phrases/${this.state.phraseToDelete.id}`,
-            method: 'DELETE'
+            type: 'DELETE'
         }).done(() => {
             this.query();
             this.setState({phraseToDelete: null});

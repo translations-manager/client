@@ -10,6 +10,7 @@ import TranslationsTable from '../static/translationsTable';
 import Client from '../client';
 
 export default React.createClass({
+    lastSearchQuery: null,
     getInitialState() {
         return {
             displayedLocales: [],
@@ -72,12 +73,20 @@ export default React.createClass({
         let domainIdsQuery = this.state.domains.map((domain) => {
             return `domain_ids[]=${domain.id}`;
         }).join('&');
-        Client.ajax({
+        let xhr = Client.ajax({
             url: `phrases?project=${this.props.project.id}&${localeIdsQuery}&${domainIdsQuery}&q=${this.state.query}`,
             type: 'GET'
-        }).done((data) => {
+        });
+
+        xhr.done((data) => {
             this.setState({translations: data, pendingQuery: false});
         });
+
+        if (this.lastSearchQuery !== null) {
+            this.lastSearchQuery.abort();
+        }
+
+        this.lastSearchQuery = xhr;
     },
     render() {
         return (

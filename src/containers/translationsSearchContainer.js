@@ -3,6 +3,7 @@ import React from 'react';
 import PhraseNewContainer from '../containers/phraseNewContainer';
 
 import ConfirmPopin from '../static/confirmPopin';
+import Loader from '../static/loader';
 import TranslationSearchFilters from '../static/translationSearchFilters';
 import TranslationsTable from '../static/translationsTable';
 
@@ -15,7 +16,8 @@ export default React.createClass({
             domains: [],
             query: '',
             translations: [],
-            phraseToDelete: null
+            phraseToDelete: null,
+            pendingQuery: true
         }
     },
     componentDidMount() {
@@ -31,13 +33,13 @@ export default React.createClass({
         }
     },
     updateDomains(domains) {
-        this.setState({domains});
+        this.setState({domains, pendingQuery: true});
     },
     updateDisplayedLocales(displayedLocales) {
-        this.setState({displayedLocales});
+        this.setState({displayedLocales, pendingQuery: true});
     },
     updateQuery(query) {
-        this.setState({query});
+        this.setState({query, pendingQuery: true});
     },
     handleTranslationUpdate(translation) {
         Client.ajax({
@@ -74,12 +76,13 @@ export default React.createClass({
             url: `phrases?project=${this.props.project.id}&${localeIdsQuery}&${domainIdsQuery}&q=${this.state.query}`,
             type: 'GET'
         }).done((data) => {
-            this.setState({translations: data});
+            this.setState({translations: data, pendingQuery: false});
         });
     },
     render() {
         return (
             <div className="translationsSearch">
+                {this.state.pendingQuery ? <Loader /> : null}
                 {this.state.phraseToDelete ? <ConfirmPopin message="Are you sure you want to delete this phrase ?" onOk={this.okForDelete} onCancel={this.clearPhraseToDelete} /> : null}
                 <TranslationSearchFilters
                     project={this.props.project}

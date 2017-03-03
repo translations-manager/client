@@ -1,5 +1,7 @@
 import React from 'react';
 
+import FlagFilterButton from './flagFilterButton';
+
 export default React.createClass({
     getInitialState() {
         return {
@@ -29,15 +31,13 @@ export default React.createClass({
                 <h5>Locales</h5>
                 {this.props.project.locales.map((locale, i) => {
                     return (
-                        <span className="localesFilter-filter" key={i}>
-                            <input
-                                type="checkbox"
-                                id={`localeFilter-${locale.id}`}
-                                value={locale.id}
-                                onChange={this.toggleCheckbox}
-                            />
-                            <label htmlFor={`localeFilter-${locale.id}`}>{locale.name}</label>
-                        </span>
+                        <FlagFilterButton
+                            key={i}
+                            value={locale.id}
+                            code={locale.code}
+                            onChange={this.toggleCheckbox}
+                            label={locale.name}
+                        />
                     );
                 })}
             </div>

@@ -1,4 +1,4 @@
-.flagFilterButton {
+.filterButton {
   margin: 4px;
   background-color: #aaa;
   border-radius: 4px;
@@ -16,12 +16,17 @@
     font-weight: normal;
     margin-bottom: 0;
 
-    .flagFilterButton-flag {
+    .filterButton-content {
       text-align: center;
-      padding: 5px 5px 5px 25px;
+      padding: 5px;
       display: block;
-      background-repeat: no-repeat;
-      background-position:  5px center;
+
+      &.filterButton-content-flag {
+        padding-left: 25px;
+        background-repeat: no-repeat;
+        background-position: 5px center;
+      }
+
       &:hover {
         cursor: pointer;
       }

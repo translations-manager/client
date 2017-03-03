@@ -1,5 +1,7 @@
 import React from 'react';
 
+import FilterButton from './filterButton';
+
 export default React.createClass({
     getInitialState() {
         return {
@@ -29,15 +31,12 @@ export default React.createClass({
                 <h5>Domains</h5>
                 {this.props.project.domains.map((domain, i) => {
                     return (
-                        <span className="domainsFilter-filter" key={i}>
-                            <input
-                                type="checkbox"
-                                id={`domainFilter-${domain.id}`}
-                                value={domain.id}
-                                onChange={this.toggleCheckbox}
-                            />
-                            <label htmlFor={`domainFilter-${domain.id}`}>{domain.name}</label>
-                        </span>
+                        <FilterButton
+                            key={i}
+                            value={domain.id}
+                            onChange={this.toggleCheckbox}
+                            label={domain.name}
+                        />
                     );
                 })}
             </div>

@@ -5,12 +5,11 @@ export default React.createClass({
         this.props.onChange(e);
     },
     render() {
-        const localeCodeClass = this.props.code.substr(this.props.code.length - 2).toLowerCase();
         return (
-            <div className="flagFilterButton">
+            <div className="filterButton">
                 <label>
                     <input type="checkbox" value={this.props.value} onChange={this.handleChange} />
-                    <span className={`flagFilterButton-flag flagFilterButton-flag--${localeCodeClass}`}>
+                    <span className={`filterButton-content ${this.props.additionalClass}`}>
                         {this.props.label}
                     </span>
                 </label>

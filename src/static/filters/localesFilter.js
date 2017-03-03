@@ -1,6 +1,6 @@
 import React from 'react';
 
-import FlagFilterButton from './flagFilterButton';
+import FilterButton from './filterButton';
 
 export default React.createClass({
     getInitialState() {
@@ -31,10 +31,10 @@ export default React.createClass({
                 <h5>Locales</h5>
                 {this.props.project.locales.map((locale, i) => {
                     return (
-                        <FlagFilterButton
+                        <FilterButton
                             key={i}
                             value={locale.id}
-                            code={locale.code}
+                            additionalClass={`filterButton-content-flag filterButton-content-flag--${locale.code.substr(locale.code.length - 2).toLowerCase()}`}
                             onChange={this.toggleCheckbox}
                             label={locale.name}
                         />

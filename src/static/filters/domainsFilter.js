@@ -5,8 +5,17 @@ import FilterButton from './filterButton';
 export default React.createClass({
     getInitialState() {
         return {
-            checkedDomains: []
+            checkedDomains: [],
+            displayed: false
         }
+    },
+    showFilters(e) {
+        e.preventDefault();
+        this.setState({displayed: true});
+    },
+    hideFilters(e) {
+        e.preventDefault();
+        this.setState({displayed: false});
     },
     toggleCheckbox(e) {
         let val = parseInt(e.target.value);
@@ -26,7 +35,7 @@ export default React.createClass({
         this.setState({checkedDomains});
     },
     render() {
-        return (
+        return this.state.displayed ? (
             <div className="domainsFilter">
                 <h5>Domains</h5>
                 {this.props.project.domains.map((domain, i) => {
@@ -39,6 +48,19 @@ export default React.createClass({
                         />
                     );
                 })}
+                <div className="domainsFilter-hide">
+                    <a href="#" onClick={this.hideFilters}>
+                        <span className="glyphicon glyphicon-minus-sign"> </span>
+                        Hide domains filters
+                    </a>
+                </div>
+            </div>
+        ) : (
+            <div className="domainsFilter">
+                <a className="domainsFilter-show" href="#" onClick={this.showFilters}>
+                    <span className="glyphicon glyphicon-plus-sign"> </span>
+                    Filter on domains...
+                </a>
             </div>
         );
     }

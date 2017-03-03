@@ -1,4 +1,8 @@
 .domainsFilter {
+  margin-bottom: 20px;
+  a {
+    color: #555;
+  }
   .domainsFilter-filter {
     margin-right: 20px;
     label {
@@ -6,10 +10,19 @@
       font-weight: normal;
     }
   }
-  &:after {
+  .domainsFilter-hide:before {
     display: block;
     content: "";
     clear: both;
     height: 0;
+  }
+  .domainsFilter-hide a, .domainsFilter-show {
+    margin-top: 15px;
+    display: block;
+    margin-left:15px;
+    .glyphicon {
+      display: inline-block;
+      margin-right: 5px;
+    }
   }
 }

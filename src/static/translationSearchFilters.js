@@ -17,8 +17,8 @@ export default React.createClass({
     render() {
         return (
             <div className="searchFiltersContainer">
-                <DomainsFilter project={this.props.project} onChange={this.updateDomainsFilter} />
                 <LocalesFilter project={this.props.project} onChange={this.updateLocalesFilter} />
+                <DomainsFilter project={this.props.project} onChange={this.updateDomainsFilter} />
                 <SearchFilter onChange={this.updateSearch} />
             </div>
         );

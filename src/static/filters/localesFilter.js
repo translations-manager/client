@@ -34,7 +34,7 @@ export default React.createClass({
                         <FilterButton
                             key={i}
                             value={locale.id}
-                            additionalClass={`filterButton-content-flag filterButton-content-flag--${locale.code.substr(locale.code.length - 2).toLowerCase()}`}
+                            additionalClass={`filterButton-content-flag filterButton-content-flag--${locale.code}`}
                             onChange={this.toggleCheckbox}
                             label={locale.name}
                         />

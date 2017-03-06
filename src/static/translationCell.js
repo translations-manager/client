@@ -15,10 +15,16 @@ export default React.createClass({
         e.preventDefault();
         this.setState({content: e.target.value});
     },
-    handleKeyDown(e) {
-        if (e.keyCode === 13) {
+    handleKeyAction(e) {
+        if (!this.keyMap) {
+            this.keyMap = {};
+        }
+        this.keyMap[e.keyCode] = e.type == 'keydown';
+        if (this.keyMap[13] && this.keyMap[16]) {
+            this.keyMap = {};
             this.handleSubmit();
-        } else if (e.keyCode === 27) {
+        } else if (this.keyMap[27]) {
+            this.keyMap = {};
             this.setState({
                 'mode': 'display',
                 'content': this.props.translation.content
@@ -40,16 +46,17 @@ export default React.createClass({
         if (this.state.mode === 'edit') {
             return (
                 <td className="translationCell">
-                    <input
-                        type="text"
-                        value={this.state.content}
+                    <textarea
                         onChange={this.handleChange}
                         onBlur={this.handleSubmit}
-                        onKeyDown={this.handleKeyDown}
+                        onKeyDown={this.handleKeyAction}
+                        onKeyUp={this.handleKeyAction}
                         autoFocus={true}
+                        value={this.state.content}
+                        rows="10"
                     />
                     <span className="translationCell-help">
-                        [ENTER] to confirm, [Esc] to cancel
+                        [Shift+ENTER] to confirm, [Esc] to cancel
                     </span>
                 </td>
             );

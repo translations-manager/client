@@ -61,9 +61,18 @@ export default React.createClass({
                 </td>
             );
         }
+        const regexp = new RegExp(/<!\[CDATA\[([^]*)\]\]>/);
+        const result = regexp.exec(this.state.translation.content);
+
         return (
             <td className="translationCell" onClick={this.switchToEditMode}>
-                {this.state.translation.content}
+                {result ? (
+                    <span className="translationCell-cdataBlock">
+                        <span className="translationCell-cdata">{`<![CDATA[`}</span>
+                        {result[1]}
+                        <span className="translationCell-cdata">{`]]>`}</span>
+                    </span>
+                ) : this.state.translation.content}
             </td>
         );
     }

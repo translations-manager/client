@@ -10,6 +10,8 @@ npm install
 bower install
 ```
 
+Edit the `src/config.json` file to match your API host
+
 ## Build the project
 
 ```bash

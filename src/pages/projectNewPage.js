@@ -35,18 +35,8 @@ export default React.createClass({
     },
     render() {
         return (
-            <div className="newProjectPage">
+            <div className="page newProjectPage">
                 {this.state.message ? <AlertPopin message={this.state.message} onClose={this.clearMessage} /> : null}
-                <Breadcrumb links={[
-                    {
-                        path: '/',
-                        name: 'Projects'
-                    },
-                    {
-                        path: null,
-                        name: `New project`
-                    }
-                ]} />
                 <h1>New project</h1>
                 {this.state.created && !this.state.message ? (
                     <Link to="/">Back to projects page</Link>

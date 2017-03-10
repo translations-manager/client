@@ -36,18 +36,8 @@ export default React.createClass({
             return <Loader />;
         }
         return (
-            <div className="editProjectPage">
+            <div className="page editProjectPage">
                 {this.state.message ? <AlertPopin message={this.state.message} onClose={this.clearMessage} /> : null}
-                <Breadcrumb links={[
-                    {
-                        path: '/',
-                        name: 'Projects'
-                    },
-                    {
-                        path: null,
-                        name: `Edit project ${this.state.project.name}`
-                    }
-                ]} />
                 <h1>Edit project {this.state.project.name}</h1>
                 <ProjectEditForm project={this.state.project} onSubmit={this.handleSubmit} />
             </div>

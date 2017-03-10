@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
+
 export default React.createClass({
     handleOkClick() {
         this.props.onOk();
@@ -8,16 +11,27 @@ export default React.createClass({
         this.props.onCancel();
     },
     render() {
+        const actions = [
+            <FlatButton
+                label="Cancel"
+                primary={true}
+                onTouchTap={this.handleCancelClick}
+            />,
+            <FlatButton
+                label="OK"
+                primary={true}
+                onTouchTap={this.handleOkClick}
+            />,
+        ];
+
         return (
-            <div className="popin">
-                <div className="popinBody">
-                    <p>{this.props.message}</p>
-                </div>
-                <div className="popinFooter">
-                    <button type="button" className="btn btn-default" onClick={this.handleOkClick}>OK</button>
-                    <button type="button" className="btn btn-default" onClick={this.handleCancelClick}>Cancel</button>
-                </div>
-            </div>
+            <Dialog
+                actions={actions}
+                modal={true}
+                open={true}
+            >
+                {this.props.message}
+            </Dialog>
         );
     }
 });

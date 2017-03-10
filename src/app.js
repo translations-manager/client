@@ -1,5 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 import LoginContainer from './containers/loginContainer';
 
@@ -20,22 +27,13 @@ export default React.createClass({
     render() {
         return (
             <div className="container">
-                <nav className="navbar navbar-default">
-                    <div className="container-fluid">
-                        <div className="navbar-header">
-                            <Link className="navbar-brand" to="/">
-                                Translations Manager
-                            </Link>
-                        </div>
-                        {this.state.loggedIn ? (
-                            <ul className="nav navbar-nav navbar-right">
-                                <li>
-                                    <a href="#" onClick={this.logOut}>Log out</a>
-                                </li>
-                            </ul>
-                        ) : null}
-                    </div>
-                </nav>
+                <AppBar
+                    className="appBar"
+                    title={<Link to="/">
+                        Translations Manager
+                    </Link>}
+                    iconElementRight={this.state.loggedIn ? <FlatButton><a href="#" onClick={this.logOut}>Log out</a></FlatButton> : null}
+                />
                 {this.state.loggedIn ? this.props.children : <LoginContainer onLoggedIn={this.handleLoggedIn} />}
             </div>
         )

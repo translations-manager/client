@@ -1,4 +1,5 @@
 import React from 'react';
+import Paper from 'material-ui/Paper';
 
 import DomainsFilter from '../static/filters/domainsFilter';
 import LocalesFilter from '../static/filters/localesFilter';
@@ -16,11 +17,11 @@ export default React.createClass({
     },
     render() {
         return (
-            <div className="searchFiltersContainer">
+            <Paper className="searchFiltersContainer">
                 <LocalesFilter project={this.props.project} onChange={this.updateLocalesFilter} />
                 <DomainsFilter project={this.props.project} onChange={this.updateDomainsFilter} />
                 <SearchFilter onChange={this.updateSearch} />
-            </div>
+            </Paper>
         );
     }
 });

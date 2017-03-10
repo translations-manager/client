@@ -8,8 +8,8 @@ export default React.createClass({
             checkedLocales: []
         }
     },
-    toggleCheckbox(e) {
-        let val = parseInt(e.target.value);
+    toggleCheckbox(value) {
+        let val = parseInt(value);
         let locale = this.props.project.locales.find((localeItem) => {
             return val === localeItem.id;
         });
@@ -28,7 +28,6 @@ export default React.createClass({
     render() {
         return (
             <div className="localesFilter">
-                <h5>Locales</h5>
                 {this.props.project.locales.map((locale, i) => {
                     return (
                         <FilterButton

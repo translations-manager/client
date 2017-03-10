@@ -7,13 +7,7 @@ import Breadcrumb from '../static/breadcrumb';
 export default React.createClass({
     render() {
         return (
-            <div className="projectsPage">
-                <Breadcrumb links={[
-                    {
-                        path: null,
-                        name: 'Projects'
-                    }
-                ]} />
+            <div className="page projectsPage">
                 <h1>List of projects</h1>
                 <ProjectsContainer />
             </div>

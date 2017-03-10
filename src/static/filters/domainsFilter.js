@@ -17,8 +17,8 @@ export default React.createClass({
         e.preventDefault();
         this.setState({displayed: false});
     },
-    toggleCheckbox(e) {
-        let val = parseInt(e.target.value);
+    toggleCheckbox(value) {
+        let val = parseInt(value);
         let domain = this.props.project.domains.find((domainItem) => {
             return val === domainItem.id;
         });
@@ -37,7 +37,6 @@ export default React.createClass({
     render() {
         return this.state.displayed ? (
             <div className="domainsFilter">
-                <h5>Domains</h5>
                 {this.props.project.domains.map((domain, i) => {
                     return (
                         <FilterButton

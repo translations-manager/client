@@ -1,7 +1,10 @@
+@import "appBar";
+
 @import "containers/phraseNewContainer";
 @import "containers/projectsContainer";
 @import "containers/searchFiltersContainer";
 
+@import "pages/page";
 @import "pages/projectPage";
 
 @import "static/filters/domainsFilter";
@@ -17,27 +20,22 @@
 @import "static/translationsRow";
 
 html, body, #root {
-  background: #eee;
   height: 100%;
   overflow: auto;
 }
 
+h1 {
+  font-family: Roboto, sans-serif;
+  padding-bottom: .3em;
+  line-height: 1.334;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 30px;
+}
+
 .container {
   min-height: 100%;
-}
-
-h1 {
-  margin-bottom: 50px;
-  color: #aaa;
-  border-left: 5px solid #aaa;
-  padding-left: 15px;
-}
-
-h5 {
-  color: #aaa;
-  border-left: 2px solid #aaa;
-  padding-left: 7px;
-  font-weight: bold;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .navbar {

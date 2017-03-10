@@ -24,17 +24,7 @@ export default React.createClass({
     render() {
         return (
             this.state.project ? (
-                <div className="projectPage">
-                    <Breadcrumb links={[
-                        {
-                            path: '/',
-                            name: 'Projects'
-                        },
-                        {
-                            path: null,
-                            name: this.state.project.name
-                        }
-                    ]} />
+                <div className="page projectPage">
                     <h1>{this.state.project.name}</h1>
                     <TranslationsSearchContainer project={this.state.project} />
                 </div>

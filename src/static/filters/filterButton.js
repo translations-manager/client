@@ -10,12 +10,14 @@ export default React.createClass({
         this.setState({selected: !this.state.selected});
     },
     render() {
+        const additionalClassName = this.props.additionalClass ? this.props.additionalClass : '';
+
         return (
             <RaisedButton
                 label={this.props.label}
                 onTouchTap={this.handleChange}
                 primary={this.state.selected}
-                className="filterButton"
+                className={`filterButton ${additionalClassName}`}
             />
         );
     }

@@ -33,7 +33,7 @@ export default React.createClass({
                         <FilterButton
                             key={i}
                             value={locale.id}
-                            additionalClass={`filterButton-content-flag filterButton-content-flag--${locale.code}`}
+                            additionalClass={`filterButton-flag filterButton-flag--${locale.code}`}
                             onChange={this.toggleCheckbox}
                             label={locale.name}
                         />

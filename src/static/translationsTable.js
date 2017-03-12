@@ -12,7 +12,7 @@ export default React.createClass({
     },
     render() {
         return (
-            <Table selectable={false}>
+            <Table selectable={false} className={`translationsTable${this.props.pendingQuery ? '--pending' : ''}`}>
                 <TableHeader displaySelectAll={false} enableSelectAll={false}>
                     <TableRow selectable={false}>
                         <TableHeaderColumn>Domain</TableHeaderColumn>

@@ -111,6 +111,7 @@ export default React.createClass({
                     translations={this.state.translations}
                     onTranslationUpdate={this.handleTranslationUpdate}
                     onAskForDelete={this.handleAskForDelete}
+                    pendingQuery={this.state.pendingQuery}
                 />
                 {this.state.totalPages ? (
                     <Paginate

@@ -4,6 +4,7 @@ import PhraseNewContainer from '../containers/phraseNewContainer';
 
 import ConfirmPopin from '../static/confirmPopin';
 import Loader from '../static/loader';
+import Paginate from '../static/paginate';
 import TranslationSearchFilters from '../static/translationSearchFilters';
 import TranslationsTable from '../static/translationsTable';
 
@@ -18,7 +19,9 @@ export default React.createClass({
             query: '',
             translations: [],
             phraseToDelete: null,
-            pendingQuery: true
+            pendingQuery: true,
+            currentPage: 1,
+            totalPages: null
         }
     },
     componentDidMount() {
@@ -66,6 +69,9 @@ export default React.createClass({
     clearPhraseToDelete() {
         this.setState({phraseToDelete: null});
     },
+    handlePageChange(page) {
+        this.setState({currentPage: page});
+    },
     query() {
         let localeIdsQuery = this.state.displayedLocales.map((locale) => {
             return `locale_ids[]=${locale.id}`;
@@ -106,6 +112,13 @@ export default React.createClass({
                     onTranslationUpdate={this.handleTranslationUpdate}
                     onAskForDelete={this.handleAskForDelete}
                 />
+                {this.state.totalPages ? (
+                    <Paginate
+                        page={this.state.currentPage}
+                        total={this.state.totalPages}
+                        onChange={this.handlePageChange}
+                    />
+                ) : null}
             </div>
         );
     }

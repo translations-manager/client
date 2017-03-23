@@ -89,7 +89,8 @@ export default React.createClass({
             this.setState({
                 translations: data.phrases,
                 pendingQuery: false,
-                totalPages: data.metadata.nb_pages
+                totalPages: data.metadata.nb_pages,
+                page: page > data.metadata.nb_pages ? data.metadata.nb_pages : page
             });
         });
 

@@ -90,7 +90,7 @@ export default React.createClass({
                 translations: data.phrases,
                 pendingQuery: false,
                 totalPages: data.metadata.nb_pages,
-                page: page > data.metadata.nb_pages ? data.metadata.nb_pages : page
+                page: this.state.page > data.metadata.nb_pages ? data.metadata.nb_pages : this.state.page
             });
         });
 

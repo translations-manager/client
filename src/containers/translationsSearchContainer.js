@@ -85,15 +85,17 @@ export default React.createClass({
             type: 'GET'
         });
 
+
         xhr.done((data) => {
+            const nbPages = parseInt(data.metadata.nb_pages);
+
             this.setState({
                 translations: data.phrases,
                 pendingQuery: false,
-                totalPages: data.metadata.nb_pages,
-                page: this.state.page > data.metadata.nb_pages ? data.metadata.nb_pages : this.state.page
+                totalPages: nbPages,
+                currentPage: this.state.currentPage > nbPages ? nbPages : this.state.currentPage
             });
         });
-
         if (this.lastSearchQuery !== null) {
             this.lastSearchQuery.abort();
         }

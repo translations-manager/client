@@ -5,7 +5,11 @@ export default React.createClass({
     handlePageClick(e) {
         e.preventDefault();
         const el = e.target.tagName === 'SPAN' ? e.target.parentElement : e.target;
-        this.props.onChange(parseInt(el.dataset.page));
+        const selectedPage = parseInt(el.dataset.page);
+
+        if (selectedPage != this.props.page) {
+            this.props.onChange(parseInt(el.dataset.page));
+        }
     },
     render() {
         return (

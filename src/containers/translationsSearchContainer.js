@@ -31,7 +31,8 @@ export default React.createClass({
         if (
             JSON.stringify(prevState.displayedLocales) !== JSON.stringify(this.state.displayedLocales) ||
             JSON.stringify(prevState.domains) !== JSON.stringify(this.state.domains) ||
-            prevState.query !== this.state.query
+            prevState.query !== this.state.query ||
+            prevState.currentPage !== this.state.currentPage
         ) {
             this.query();
         }
@@ -70,7 +71,7 @@ export default React.createClass({
         this.setState({phraseToDelete: null});
     },
     handlePageChange(page) {
-        this.setState({currentPage: page});
+        this.setState({currentPage: page, pendingQuery: true});
     },
     query() {
         let localeIdsQuery = this.state.displayedLocales.map((locale) => {
@@ -80,12 +81,16 @@ export default React.createClass({
             return `domain_ids[]=${domain.id}`;
         }).join('&');
         let xhr = Client.ajax({
-            url: `phrases?project=${this.props.project.id}&${localeIdsQuery}&${domainIdsQuery}&q=${this.state.query}`,
+            url: `phrases?project=${this.props.project.id}&${localeIdsQuery}&${domainIdsQuery}&q=${this.state.query}&page=${this.state.currentPage}`,
             type: 'GET'
         });
 
         xhr.done((data) => {
-            this.setState({translations: data, pendingQuery: false});
+            this.setState({
+                translations: data.phrases,
+                pendingQuery: false,
+                totalPages: data.metadata.nb_pages
+            });
         });
 
         if (this.lastSearchQuery !== null) {

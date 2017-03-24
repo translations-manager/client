@@ -18,8 +18,8 @@ export default React.createClass({
                 {this.props.phrase.translations.map((translation, i) => {
                     return <TranslationCell key={i} translation={translation} onUpdate={this.handleTranslationUpdate} />
                 })}
-                <td className="translationsRow-delete">
-                    <span className="glyphicon glyphicon-trash" onClick={this.handleDeleteClick}> </span>
+                <td className="translationsRow-delete" onClick={this.handleDeleteClick}>
+                    <span className="glyphicon glyphicon-trash"> </span>
                 </td>
             </tr>
         );

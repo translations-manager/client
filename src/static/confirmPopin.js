@@ -29,6 +29,7 @@ export default React.createClass({
                 actions={actions}
                 modal={true}
                 open={true}
+                title={this.props.title ? this.props.title : null}
             >
                 {this.props.message}
             </Dialog>

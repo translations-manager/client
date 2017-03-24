@@ -106,7 +106,7 @@ export default React.createClass({
         return (
             <div className="translationsSearch">
                 {this.state.pendingQuery ? <Loader /> : null}
-                {this.state.phraseToDelete ? <ConfirmPopin message="Are you sure you want to delete this phrase ?" onOk={this.okForDelete} onCancel={this.clearPhraseToDelete} /> : null}
+                {this.state.phraseToDelete ? <ConfirmPopin title={this.state.phraseToDelete.key} message="Are you sure you want to delete this phrase ?" onOk={this.okForDelete} onCancel={this.clearPhraseToDelete} /> : null}
                 <TranslationSearchFilters
                     project={this.props.project}
                     onDisplayedLocalesChange={this.updateDisplayedLocales}

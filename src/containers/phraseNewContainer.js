@@ -1,4 +1,5 @@
 import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import PhraseNewForm from '../static/phraseNewForm';
 import AlertPopin from '../static/alertPopin';
@@ -36,7 +37,7 @@ export default React.createClass({
                 {this.state.displayForm ? (
                     <PhraseNewForm project={this.props.project} onSubmit={this.addPhrase} />
                 ) : (
-                    <button className="btn btn-primary" onClick={this.displayForm}>Add phrase</button>
+                    <RaisedButton label="Add phrase" secondary={true} onClick={this.displayForm} />
                 )}
             </div>
         );

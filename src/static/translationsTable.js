@@ -1,6 +1,5 @@
 import React from 'react';
 
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import TranslationsRow from '../static/translationsRow';
 
 export default React.createClass({
@@ -12,17 +11,18 @@ export default React.createClass({
     },
     render() {
         return (
-            <Table selectable={false} className={`translationsTable${this.props.pendingQuery ? '--pending' : ''}`}>
-                <TableHeader displaySelectAll={false} enableSelectAll={false}>
-                    <TableRow selectable={false}>
-                        <TableHeaderColumn>Domain</TableHeaderColumn>
-                        <TableHeaderColumn>Key</TableHeaderColumn>
+            <table className={`translationsTable${this.props.pendingQuery ? '--pending' : ''}`}>
+                <thead>
+                    <tr>
+                        <th>Domain</th>
+                        <th>Key</th>
                         {this.props.displayedLocales.map((locale, i) => {
-                            return <TableHeaderColumn key={i}>{locale.name}</TableHeaderColumn>;
+                            return <th key={i}>{locale.name}</th>;
                         })}
-                    </TableRow>
-                </TableHeader>
-                <TableBody>
+                        <th> </th>
+                    </tr>
+                </thead>
+                <tbody>
                     {this.props.translations.map((phrase, i) => {
                         return <TranslationsRow
                             key={i}
@@ -32,8 +32,8 @@ export default React.createClass({
                             isStriped={!!(i % 2)}
                         />;
                     })}
-                </TableBody>
-            </Table>
+                </tbody>
+            </table>
         );
     }
 });

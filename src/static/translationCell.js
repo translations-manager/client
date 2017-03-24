@@ -1,5 +1,4 @@
 import React from 'react';
-import {TableRowColumn} from 'material-ui/Table';
 
 export default React.createClass({
     getInitialState() {
@@ -44,14 +43,9 @@ export default React.createClass({
         }
     },
     render() {
-        let cellProps = Object.assign({}, this.props);
-
-        delete cellProps.translation;
-        delete cellProps.onUpdate;
-
         if (this.state.mode === 'edit') {
             return (
-                <TableRowColumn className="translationCell" {...cellProps}>
+                <td className="translationCell">
                     <textarea
                         onChange={this.handleChange}
                         onBlur={this.handleSubmit}
@@ -64,14 +58,14 @@ export default React.createClass({
                     <span className="translationCell-help">
                         [Shift+ENTER] to confirm, [Esc] to cancel
                     </span>
-                </TableRowColumn>
+                </td>
             );
         }
         const regexp = new RegExp(/<!\[CDATA\[([^]*)\]\]>/);
         const result = regexp.exec(this.state.translation.content);
 
         return (
-            <TableRowColumn className="translationCell" onTouchTap={this.switchToEditMode} {...cellProps}>
+            <td className="translationCell" onTouchTap={this.switchToEditMode}>
                 {result ? (
                     <span className="translationCell-cdataBlock">
                         <span className="translationCell-cdata">{`<![CDATA[`}</span>
@@ -79,7 +73,7 @@ export default React.createClass({
                         <span className="translationCell-cdata">{`]]>`}</span>
                     </span>
                 ) : this.state.translation.content}
-            </TableRowColumn>
+            </td>
         );
     }
 });

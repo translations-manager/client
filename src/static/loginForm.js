@@ -1,4 +1,6 @@
 import React from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import TextField from 'material-ui/TextField';
 
 export default React.createClass({
     getInitialState() {
@@ -20,19 +22,18 @@ export default React.createClass({
     render() {
         return (
             <form className="loginForm" onSubmit={this.handleSubmit}>
-                <input
-                    type="text"
-                    className="loginForm-username form-control"
+                <TextField
+                    floatingLabelText="Username"
+                    className="loginForm-action"
                     onChange={this.handleUsernameChange}
-                    placeholder="Username"
                 />
-                <input
-                    type="password"
-                    className="loginForm-password form-control"
+                <TextField
+                    floatingLabelText="Password"
+                    className="loginForm-action"
                     onChange={this.handlePasswordChange}
-                    placeholder="Password"
+                    type="password"
                 />
-                <input type="submit" className="btn btn-default" />
+                <RaisedButton className="loginForm-submit" label="Log me in" secondary={true} onClick={this.handleSubmit} />
             </form>
         );
     }

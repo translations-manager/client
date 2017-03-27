@@ -14,12 +14,11 @@ export default React.createClass({
             return val === localeItem.id;
         });
         let checkedLocales = this.state.checkedLocales.slice(0);
-        let idx = checkedLocales.indexOf(locale);
 
-        if (idx !== -1) {
-            checkedLocales.splice(idx, 1);
+        if (checkedLocales[locale.id]) {
+            checkedLocales.splice(locale.id, 1);
         } else {
-            checkedLocales.push(locale);
+            checkedLocales[locale.id] = locale;
         }
 
         this.props.onChange(checkedLocales);

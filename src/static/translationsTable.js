@@ -12,7 +12,7 @@ export default React.createClass({
     render() {
         return (
             this.props.translations.length ? (
-                <table className={`translationsTable${this.props.pendingQuery ? '--pending' : ''}`}>
+                <table className={`translationsTable${this.props.pendingQuery ? ' translationsTable--pending' : ''}`}>
                     <thead>
                         <tr>
                             <th>Domain</th>

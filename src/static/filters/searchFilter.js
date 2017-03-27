@@ -20,20 +20,6 @@ export default React.createClass({
                 onChange={this.handleChange}
                 value={this.state.query}
             />
-            // <div className="searchFilter">
-            //     <div className="input-group">
-            //         <span className="input-group-addon">
-            //             <span className="glyphicon glyphicon-search"> </span>
-            //         </span>
-            //         <input
-            //             className="form-control input-sm"
-            //             type="text"
-            //             placeholder="Search by key, translation, ..."
-            //             onChange={this.handleChange}
-            //             value={this.state.query}
-            //         />
-            //     </div>
-            // </div>
         );
     }
 });

@@ -16,6 +16,9 @@ export default React.createClass({
     displayForm() {
         this.setState({displayForm: true});
     },
+    hideForm() {
+        this.setState({displayForm: false});
+    },
     addPhrase(phrase) {
         Client.ajax({
             type: 'POST',
@@ -35,7 +38,7 @@ export default React.createClass({
                     <AlertPopin message={this.state.message} onClose={this.clearMessage} />
                 ) : null}
                 {this.state.displayForm ? (
-                    <PhraseNewForm project={this.props.project} onSubmit={this.addPhrase} />
+                    <PhraseNewForm project={this.props.project} onSubmit={this.addPhrase} onCancel={this.hideForm} />
                 ) : (
                     <RaisedButton label="Add phrase" secondary={true} onClick={this.displayForm} />
                 )}

@@ -1,4 +1,8 @@
 import React from 'react';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default React.createClass({
     getInitialState() {
@@ -8,11 +12,11 @@ export default React.createClass({
             key: ''
         };
     },
-    handleDomainChange(e) {
-        this.setState({domain: e.target.value});
+    handleDomainChange(e, i, v) {
+        this.setState({domain: v});
     },
-    handleFileLocationChange(e) {
-        this.setState({file_location: e.target.value});
+    handleFileLocationChange(e, i, v) {
+        this.setState({file_location: v});
     },
     handleKeyChange(e) {
         this.setState({key: e.target.value});
@@ -21,31 +25,48 @@ export default React.createClass({
         e.preventDefault();
         this.props.onSubmit(this.state);
     },
+    handleCancel() {
+        this.props.onCancel();
+    },
     render() {
         return (
             <div className="phraseNewForm">
                 <form onSubmit={this.handleSubmit}>
-                    <div className="row">
+                    <div className="row phraseNewForm-inputs">
                         <div className="col-md-3">
-                            <select className="form-control" onChange={this.handleDomainChange}>
+                            <SelectField
+                                floatingLabelText="Domain"
+                                value={this.state.domain}
+                                onChange={this.handleDomainChange}
+                            >
                                 {this.props.project.domains.map((domain, i) => {
-                                    return <option value={domain.id} key={i}>{domain.name}</option>
+                                    return <MenuItem value={domain.id} key={i} primaryText={domain.name} />;
                                 })}
-                            </select>
+                            </SelectField>
                         </div>
                         <div className="col-md-3">
-                            <select className="form-control" onChange={this.handleFileLocationChange}>
+                            <SelectField
+                                floatingLabelText="File location"
+                                value={this.state.file_location}
+                                onChange={this.handleFileLocationChange}
+                            >
                                 {this.props.project.file_locations.map((fileLocation, i) => {
-                                    return <option value={fileLocation.id} key={i}>{fileLocation.path}</option>
+                                    return <MenuItem value={fileLocation.id} key={i} primaryText={fileLocation.path} />;
                                 })}
-                            </select>
+                            </SelectField>
                         </div>
-                        <div className="col-md-5">
-                            <input className="form-control" type="text" placeholder="Key" onChange={this.handleKeyChange} />
+                        <div className="col-md-6">
+                            <TextField
+                                className="searchFilter"
+                                floatingLabelText="Phrase key"
+                                onChange={this.handleKeyChange}
+                                value={this.state.key}
+                            />
                         </div>
-                        <div className="col-md-1">
-                            <input className="btn btn-default" type="submit" value="OK" />
-                        </div>
+                    </div>
+                    <div className="phraseNewForm-actions">
+                        <RaisedButton label="Cancel" onClick={this.handleCancel} />
+                        <RaisedButton label="OK" secondary={true} onClick={this.handleSubmit} />
                     </div>
                 </form>
             </div>

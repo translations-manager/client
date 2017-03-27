@@ -17,11 +17,10 @@ export default React.createClass({
                         <tr>
                             <th>Domain</th>
                             <th>Key</th>
-                            {this.props.translations[0].translations.map((translation, i) => {
-                                const displayedLocale = this.props.displayedLocales[parseInt(translation.locale)];
+                            {this.props.displayedLocales.map((locale, i) => {
                                 return (
                                     <th key={i}>
-                                        {displayedLocale ? displayedLocale.name : ''}
+                                        {locale.name}
                                     </th>
                                 );
                             })}

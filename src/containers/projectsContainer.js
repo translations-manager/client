@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import Client from '../client';
 
@@ -67,7 +68,7 @@ export default React.createClass({
                 }
                 </div>
                 <div className="projectsContainer-actions">
-                    <Link className="btn btn-primary" to="new-project">New project</Link>
+                    <RaisedButton label={<Link to="new-project">New project</Link>} secondary={true} />
                 </div>
             </div>
         ) : (<Loader />);

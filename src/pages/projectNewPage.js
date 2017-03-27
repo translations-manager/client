@@ -2,8 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 import AlertPopin from '../static/alertPopin';
-import Breadcrumb from '../static/breadcrumb';
-import ProjectEditForm from '../static/projectEditForm';
+import ProjectNewForm from '../static/projectNewForm';
 
 import Client from '../client';
 
@@ -41,7 +40,7 @@ export default React.createClass({
                 {this.state.created && !this.state.message ? (
                     <Link to="/">Back to projects page</Link>
                 ) : (
-                    <ProjectEditForm project={this.state.project} onSubmit={this.handleSubmit} />
+                    <ProjectNewForm project={this.state.project} onSubmit={this.handleSubmit} />
                 )}
             </div>
         );

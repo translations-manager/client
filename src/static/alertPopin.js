@@ -1,19 +1,29 @@
 import React from 'react';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 export default React.createClass({
     handleCloseClick() {
         this.props.onClose();
     },
     render() {
+        const actions = [
+            <FlatButton
+                label="OK"
+                primary={true}
+                onTouchTap={this.handleCloseClick}
+            />,
+        ];
+
         return (
-            <div className="popin">
-                <div className="popinBody">
-                    <p>{this.props.message}</p>
-                </div>
-                <div className="popinFooter">
-                    <button type="button" className="btn btn-default" onClick={this.handleCloseClick}>OK</button>
-                </div>
-            </div>
+            <Dialog
+                actions={actions}
+                modal={true}
+                open={true}
+                title={this.props.title ? this.props.title : null}
+            >
+                {this.props.message}
+            </Dialog>
         );
     }
 });

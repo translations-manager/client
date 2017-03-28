@@ -102,7 +102,7 @@ export default React.createClass({
                 translations: data.phrases,
                 pendingQuery: false,
                 totalPages: nbPages,
-                currentPage: this.state.currentPage > nbPages ? nbPages : this.state.currentPage
+                currentPage: this.state.currentPage > nbPages ? (nbPages > 0 ? nbPages : 1) : this.state.currentPage
             });
         });
         if (this.lastSearchQuery !== null) {

@@ -3,6 +3,7 @@ import React from 'react';
 import PhraseNewContainer from '../containers/phraseNewContainer';
 
 import ConfirmPopin from '../static/confirmPopin';
+import ErrorMessage from '../static/errorMessage';
 import Loader from '../static/loader';
 import Paginate from '../static/paginate';
 import TranslationSearchFilters from '../static/translationSearchFilters';
@@ -21,7 +22,8 @@ export default React.createClass({
             phraseToDelete: null,
             pendingQuery: true,
             currentPage: 1,
-            totalPages: null
+            totalPages: null,
+            errorMessage: null
         }
     },
     componentDidMount() {
@@ -53,6 +55,8 @@ export default React.createClass({
             type: translation.id ? 'PUT' : 'POST'
         }).done(() => {
             this.query();
+        }).fail(() => {
+            this.setState({errorMessage: 'Failed to update translation'});
         });
     },
     handleAskForDelete(phrase) {
@@ -65,10 +69,15 @@ export default React.createClass({
         }).done(() => {
             this.query();
             this.setState({phraseToDelete: null});
+        }).fail(() => {
+            this.setState({errorMessage: 'Failed to delete phrase'});
         });
     },
     clearPhraseToDelete() {
         this.setState({phraseToDelete: null});
+    },
+    clearErrorMessage() {
+        this.setState({errorMessage: null});
     },
     handlePageChange(page) {
         this.setState({currentPage: page, pendingQuery: true});
@@ -105,6 +114,7 @@ export default React.createClass({
     render() {
         return (
             <div className="translationsSearch">
+                {this.state.errorMessage ? <ErrorMessage message={this.state.errorMessage} onClose={this.clearErrorMessage} /> : null}
                 {this.state.pendingQuery ? <Loader /> : null}
                 {this.state.phraseToDelete ? <ConfirmPopin title={this.state.phraseToDelete.key} message="Are you sure you want to delete this phrase ?" onOk={this.okForDelete} onCancel={this.clearPhraseToDelete} /> : null}
                 <TranslationSearchFilters

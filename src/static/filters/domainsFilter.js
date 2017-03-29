@@ -34,6 +34,12 @@ export default React.createClass({
         this.props.onChange(checkedDomains);
         this.setState({checkedDomains});
     },
+    isDomainChecked(domainId) {
+        const val = parseInt(domainId);
+        return this.state.checkedDomains.indexOf(this.props.project.domains.find((domainItem) => {
+            return val === domainItem.id;
+        })) !== -1;
+    },
     render() {
         return this.state.displayed ? (
             <div className="domainsFilter">
@@ -44,6 +50,7 @@ export default React.createClass({
                             value={domain.id}
                             onChange={this.toggleCheckbox}
                             label={domain.name}
+                            selected={this.isDomainChecked(domain.id)}
                         />
                     );
                 })}

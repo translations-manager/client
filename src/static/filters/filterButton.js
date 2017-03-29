@@ -3,7 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 export default React.createClass({
     getInitialState() {
-        return {selected: false};
+        return {selected: this.props.selected !== undefined ? this.props.selected : false};
     },
     handleChange() {
         this.props.onChange(this.props.value);

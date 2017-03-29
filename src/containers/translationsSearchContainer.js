@@ -6,7 +6,7 @@ import ConfirmPopin from '../static/confirmPopin';
 import ErrorMessage from '../static/errorMessage';
 import Loader from '../static/loader';
 import Paginate from '../static/paginate';
-import SuccessMessage from '../static/errorMessage';
+import SuccessMessage from '../static/successMessage';
 import TranslationSearchFilters from '../static/translationSearchFilters';
 import TranslationsTable from '../static/translationsTable';
 

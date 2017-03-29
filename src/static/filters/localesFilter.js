@@ -16,7 +16,7 @@ export default React.createClass({
         let checkedLocales = this.state.checkedLocales.slice(0);
 
         if (checkedLocales[locale.id]) {
-            checkedLocales.splice(locale.id, 1);
+            delete checkedLocales[locale.id];
         } else {
             checkedLocales[locale.id] = locale;
         }

@@ -6,6 +6,7 @@ import ConfirmPopin from '../static/confirmPopin';
 import ErrorMessage from '../static/errorMessage';
 import Loader from '../static/loader';
 import Paginate from '../static/paginate';
+import SuccessMessage from '../static/errorMessage';
 import TranslationSearchFilters from '../static/translationSearchFilters';
 import TranslationsTable from '../static/translationsTable';
 
@@ -23,7 +24,8 @@ export default React.createClass({
             pendingQuery: true,
             currentPage: 1,
             totalPages: null,
-            errorMessage: null
+            errorMessage: null,
+            successMessage: null
         }
     },
     componentDidMount() {
@@ -54,6 +56,7 @@ export default React.createClass({
             data: translation,
             type: translation.id ? 'PUT' : 'POST'
         }).done(() => {
+            this.setState({successMessage: 'Translation updated'});
             this.query();
         }).fail(() => {
             this.setState({errorMessage: 'Failed to update translation'});
@@ -68,7 +71,7 @@ export default React.createClass({
             type: 'DELETE'
         }).done(() => {
             this.query();
-            this.setState({phraseToDelete: null});
+            this.setState({successMessage: 'Phrase deleted', phraseToDelete: null});
         }).fail(() => {
             this.setState({errorMessage: 'Failed to delete phrase'});
         });
@@ -78,6 +81,9 @@ export default React.createClass({
     },
     clearErrorMessage() {
         this.setState({errorMessage: null});
+    },
+    clearSuccessMessage() {
+        this.setState({successMessage: null});
     },
     handlePageChange(page) {
         this.setState({currentPage: page, pendingQuery: true});
@@ -115,6 +121,7 @@ export default React.createClass({
         return (
             <div className="translationsSearch">
                 {this.state.errorMessage ? <ErrorMessage message={this.state.errorMessage} onClose={this.clearErrorMessage} /> : null}
+                {this.state.successMessage ? <SuccessMessage message={this.state.successMessage} onClose={this.clearSuccessMessage} /> : null}
                 {this.state.pendingQuery ? <Loader /> : null}
                 {this.state.phraseToDelete ? <ConfirmPopin title={this.state.phraseToDelete.key} message="Are you sure you want to delete this phrase ?" onOk={this.okForDelete} onCancel={this.clearPhraseToDelete} /> : null}
                 <TranslationSearchFilters

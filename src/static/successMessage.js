@@ -11,7 +11,7 @@ export default React.createClass({
             message={this.props.message}
             autoHideDuration={2000}
             onRequestClose={this.handleClose}
-            className="errorMessage"
+            className="successMessage"
         />
     }
 });

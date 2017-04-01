@@ -22,14 +22,14 @@ export default React.createClass({
         e.preventDefault();
         let project = this.state.project;
 
-        project.domains.splice(e.target.getAttribute('data-key'), 1);
+        project.domains.splice(parseInt(e.target.getAttribute('data-key')), 1);
         this.setState({project});
     },
     editDomain(e) {
         e.preventDefault();
         let project = this.state.project;
 
-        project.domains[e.target.getAttribute('data-key')].name = e.target.value;
+        project.domains[parseInt(e.target.getAttribute('data-key'))].name = e.target.value;
         this.setState({project});
     },
     addFileLocation(e) {
@@ -43,14 +43,14 @@ export default React.createClass({
         e.preventDefault();
         let project = this.state.project;
 
-        project.file_locations.splice(e.target.getAttribute('data-key'), 1);
+        project.file_locations.splice(parseInt(e.target.getAttribute('data-key')), 1);
         this.setState({project});
     },
     editFileLocation(e) {
         e.preventDefault();
         let project = this.state.project;
 
-        project.file_locations[e.target.getAttribute('data-key')].path = e.target.value;
+        project.file_locations[parseInt(e.target.getAttribute('data-key'))].path = e.target.value;
         this.setState({project});
     },
     addLocale(e) {
@@ -64,14 +64,14 @@ export default React.createClass({
         e.preventDefault();
         let project = this.state.project;
 
-        project.locales.splice(e.target.getAttribute('data-key'), 1);
+        project.locales.splice(parseInt(e.target.getAttribute('data-key')), 1);
         this.setState({project});
     },
     editLocaleCode(e) {
         e.preventDefault();
         let project = this.state.project;
 
-        project.locales[e.target.getAttribute('data-key')].code = e.target.value;
+        project.locales[parseInt(e.target.getAttribute('data-key'))].code = e.target.value;
         this.setState({project});
     },
     editLocaleName(e) {
